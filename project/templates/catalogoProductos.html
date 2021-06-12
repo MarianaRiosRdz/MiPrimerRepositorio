@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h3 class="title">Catalogo de productos.</h3>
+</div>
+
+<div class="columns is-multiline is-mobile">
+    {%for prod in productos %}
+    <div class="column is-one-quarter">
+        <div class="card">
+            <!--<header class="card-header">
+                <p class="card-header-title">
+                Component
+                </p>
+            </header>-->
+            <div class="card-content">
+                <div class="center">
+                    <figure class="image is-1by1">
+                        <img class="thumbnail" src="img/{{prod.foto}}">
+                    </figure>
+                </div>
+                <br>
+                <div class="content">
+                    <h3>{{prod.nombre}}</h3>
+                    <h4>${{prod.precio}} MXN</h4>
+                    <p>Descripcion:<br>
+                    {{prod.descripcion}}</p>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a href="#" class="card-footer-item">Favoritos</a>
+                <a href="#" class="card-footer-item">Comprar</a>
+            </footer>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}

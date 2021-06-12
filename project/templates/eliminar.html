@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h3 class="title">¿Desea eliminar el producto?</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. 
+                Ir a <a href="{{ url_for('auth.login') }}">login</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="eliminar">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="nombre" placeholder="Nombre" value="{{datos.nombre}}" autofocus="" readonly>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="precio" placeholder="Precio" value="{{datos.precio}}" autofocus="" readonly>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="descripcion" value="{{datos.descripcion}}" placeholder="Descripcion" readonly>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="number" min="0" name="stock" value="{{datos.stock}}" placeholder="Cantidad en existencia" readonly>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <figure class="image is-128x128">
+                        <img class="thumbnail" width="100" src="{{ url_for('main.img', filename= datos.foto)}}">
+                    </figure>
+                    <!--<input class="input is-large" type="file" name="foto" value="{{datos.foto}}" placeholder="Fotografia" autofocus="" readonly>-->
+                </div>
+            </div>
+            
+            <a href="consultarProductos" class="button btn-inverse"><i class="icon-remove icon-white"></i> Cancelar</a>
+
+            <button type="submit" class="button is-danger">Eliminar</button>
+            
+        </form>
+    </div>
+</div>
+{% endblock %}

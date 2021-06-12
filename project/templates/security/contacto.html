@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h3 class="title">Contactanos</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. 
+                Ir a <a href="{{ url_for('auth.login') }}">login</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="" enctype=multipart/form-data>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="nombre" placeholder="Nombre completo" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="asunto" placeholder="Descripcion">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="textarea"  name="mensaje" placeholder="Mensaje">
+                </div>
+            </div>
+
+            <a type="button"class="button is-success is-block is large">Enviar</a>
+        </form>
+    </div>
+    <h5>Llamanos al 01-800-123-12</h5>
+    <h5>Horarios:</h5>
+    <h5>Lunes a Sabado de 09:00 - 21:00</h5>
+    <h5>Domingo de 09:00 - 17:00</h5>
+</div>
+{% endblock %}

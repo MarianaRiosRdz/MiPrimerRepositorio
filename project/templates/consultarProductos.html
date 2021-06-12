@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+      ¡Bienvenido!
+      Como es administrador puede hacer uso del CRUD de productos.
+</h1>
+<div class="column is-8 is-offset-2">
+    <h3 class="title">Registrar productos.</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                No tienes permiso para acceder a Catalogo de productos.
+                Ingresa como usuario con rol de cliente. Ir a <a href="{{ url_for('auth.login') }}">login</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <a href="productos" class="button is-info">Agregar</a>
+    </div>
+</div>
+<div class="column is-12 is-offset-0">
+    <h5 class="title">Productos:</h5>
+    <div class="box">
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr class="tr-head">
+                    <th>ID producto</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Descripcion</th>
+                    <th>Stock</th>
+                    <th>Foto</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%for prod in productos%}
+                    <tr>
+                        <th>{{prod.id}}</th>
+                        <th>{{prod.nombre}}</th>
+                        <th>{{prod.precio}}</th>
+                        <th>{{prod.descripcion}}</th>
+                        <th>{{prod.stock}}</th>
+                        <th>
+                            <figure class="image is-128x128">
+                                <img class="thumbnail" width="100" src="img/{{prod.foto}}">
+                            </figure>
+                        </th>
+                        <!--<th>{{prod.foto}}</th>-->
+                        <th>
+                            <form method="POST" action="consultarProductos">
+                                <input type="hidden" id="idProducto" name="idProducto" value={{prod.id}}>
+                                <input type="hidden" id="opcion_m" name="opcion_m" value="Eliminar">
+                                <button type="submit" class="button is-danger">Eliminar</button>
+                            </form>
+                        </th>
+                        <th>
+                            <form method="POST" action="consultarProductos">
+                                <input type="hidden" id="idProducto" name="idProducto" value={{prod.id}}>
+                                <input type="hidden" id="opcion_m" name="opcion_m" value="Modificar">
+                                <button type="submit" class="button is-info">Modificar</button>
+                            </form>
+                        </th>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

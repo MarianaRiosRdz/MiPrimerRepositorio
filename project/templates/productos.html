@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h3 class="title">Registrar productos</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. 
+                Ir a <a href="{{ url_for('auth.login') }}">login</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="productos" enctype=multipart/form-data>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="nombre" placeholder="Nombre" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="precio" placeholder="Precio" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="descripcion" placeholder="Descripcion">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="number" min="0" name="stock" placeholder="Cantidad en existencia">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="file" name="foto" placeholder="Fotografia" autofocus="">
+                </div>
+            </div>
+            
+            <a href="consultarProductos" class="button btn-inverse"><i class="icon-remove icon-white"></i> Cancelar</a>
+
+            <button class="button is-success">Registrar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
